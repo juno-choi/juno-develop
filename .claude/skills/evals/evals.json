@@ -1,0 +1,44 @@
+{
+  "skill_name": "work-skills",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "결제 시스템 프로젝트 개발 계획 만들어줘",
+      "expected_output": "PM 프로젝트의 requirements/PRD/tech_spec을 읽고 plan.md를 생성. phase 단위로 분할된 Steps 포함.",
+      "files": [],
+      "assertions": [
+        {"text": "plan-has-goal: Goal 섹션이 존재하고 출금/withdrawal 관련 내용을 포함한다"},
+        {"text": "plan-has-inputs: PM 문서 경로(requirements, PRD, tech_spec)가 Inputs에 기록되어 있다"},
+        {"text": "plan-has-phases: Steps에 phase 목록이 3개 이상 존재한다"},
+        {"text": "plan-uses-template: template/plan.md 구조(Goal, Inputs, Done When, Steps)를 따른다"},
+        {"text": "plan-reflects-techspec: tech_spec의 마일스톤이 phase 분할에 반영되어 있다"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "업무 시작해줘",
+      "expected_output": "기존 plan.md를 읽고 phase_1.md를 생성. Tasks, Constraints, Acceptance Criteria 포함.",
+      "files": [],
+      "assertions": [
+        {"text": "phase-has-objective: Objective 섹션이 존재한다"},
+        {"text": "phase-has-tasks: Tasks 체크리스트가 3개 이상 존재한다"},
+        {"text": "phase-has-criteria: Acceptance Criteria가 존재한다"},
+        {"text": "phase-uses-template: template/phase_{n}.md 구조(Objective, Context, Tasks, Constraints, Acceptance Criteria)를 따른다"},
+        {"text": "phase-matches-plan: plan.md의 phase_1(Withdrawal 도메인 모델 + Repository) 내용과 일치한다"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "현재 진행 상황 리뷰해줘",
+      "expected_output": "plan, phase, handoff를 종합 검토하여 진행률, 완료/미완료 항목, 변경사항, 블로커를 보고.",
+      "files": [],
+      "assertions": [
+        {"text": "review-has-progress: 전체 진행률 정보를 포함한다 (예: 1/5 phases 완료)"},
+        {"text": "review-has-blocked: Blocked 항목(H2 테스트 설정 문제)을 언급한다"},
+        {"text": "review-has-changes: Changed 항목(CANCELLED 상태 추가, operatorId 필드 추가)을 언급한다"},
+        {"text": "review-current-phase: 현재 phase_2의 상세 진행 상황(Tasks 완료/미완료)을 포함한다"},
+        {"text": "review-next-action: 구체적인 다음 액션을 제안한다"}
+      ]
+    }
+  ]
+}
