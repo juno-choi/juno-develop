@@ -25,67 +25,16 @@ description: "완료된 업무를 log로 정리하고 outputs로 아카이브하
 
 완료되지 않은 항목이 있으면 사용자에게 알리고 진행 여부를 확인한다.
 
-### 3. log.md 생성
+### 3. log.md 생성 및 아카이브 (log-writer Agent)
 
-`template/log.md`를 기반으로, 프로젝트의 전체 이력을 정리한다:
+Agent 도구로 `log-writer` sub-agent를 호출한다.
 
-```markdown
-# Log: {project_name}
+프롬프트에 다음을 포함한다:
+- 프로젝트 디렉토리 경로
+- 템플릿 경로: `template/log.md`
+- 완료 상태 확인 결과 (step 2에서 파악한 미완료 항목 목록)
 
-## 기간
-- 시작: {yyyyMMdd}
-- 종료: {오늘 날짜}
-
-## 목표
-- {plan.md의 Goal}
-
-## 완료된 작업
-### Phase 1: {objective}
-- {주요 완료 작업들}
-
-### Phase 2: {objective}
-- {주요 완료 작업들}
-
-...
-
-## 변경 이력
-- {handoff들의 Changed 항목 종합}
-
-## 미해결 사항
-- {남은 Blocked 항목 또는 "없음"}
-
-## 회고
-- {잘된 점}
-- {개선할 점}
-- {다음에 참고할 사항}
-```
-
-회고 섹션은 handoff들의 Changed/Blocked 패턴을 분석하여 초안을 작성하되, 사용자가 직접 보완하도록 안내한다.
-
-### 4. 프로젝트 이동
-
-사용자 확인 후 프로젝트 디렉토리를 `outputs/`로 이동한다.
-
-```bash
-mv projects/{yyyyMMdd}_{project_name} outputs/
-```
-
-`outputs/`에 동일 이름이 이미 존재하면 사용자에게 알리고 진행 여부를 확인한다.
-
-### 5. 완료 보고
-
-이동 결과를 사용자에게 보여준다:
-
-```
-프로젝트 아카이브 완료:
-projects/{yyyyMMdd}_{project_name}/  →  outputs/{yyyyMMdd}_{project_name}/
-
-포함 파일:
-  ├── plan.md
-  ├── phase_1.md ~ phase_{n}.md
-  ├── handoff_1.md ~ handoff_{n}.md
-  └── log.md (신규 생성)
-```
+log-writer가 log.md를 생성하고, 사용자 확인 후 `outputs/`로 이동하며 완료를 보고한다.
 
 ## 주의사항
 
