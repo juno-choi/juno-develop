@@ -38,7 +38,7 @@ develop/
 ## Workflow
 
 ```
-/work-plan → /work-phase → /work-review → /work-outputs
+/work-plan → /work-phase → /work-review (optional) → /work-outputs
 ```
 
 | Skill            | 설명                                                    |

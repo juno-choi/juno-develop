@@ -8,7 +8,6 @@ plan.md의 `## Profile` 필드로 사용할 프로필을 지정한다.
 | Profile            | 기술 스택                                 | 경로                                   |
 | ------------------ | ------------------------------------- | ------------------------------------ |
 | `java-spring`      | Java/Kotlin + Spring Boot + DDD + EDA | `context/conventions/java-spring/`      |
-| `typescript-react` | TypeScript + React + Next.js          | `context/conventions/typescript-react/` |
 
 ### 프로필 구조
 
